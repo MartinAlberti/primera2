@@ -1,1 +1,47 @@
-[{"title":"Updated","description":"Italia","price":2300,"thumbnail":"asd","code":"232321232222233","stock":12,"id":1},{"title":"Updated2","description":"Casa","price":22222,"thumbnail":"asd","code":"232321232222233","stock":12,"id":2},{"title":"1221232223","description":"Italia","price":2300,"thumbnail":"asd","code":"232321232222233","stock":12,"id":3}]
+[
+  {
+    "title": "prod1 actualizado",
+    "description": "Casa",
+    "price": 22222,
+    "thumbnail": "asd",
+    "code": "12334",
+    "stock": 12,
+    "id": 1
+  },
+  {
+    "title": "prod2",
+    "description": "Casa",
+    "price": 22222,
+    "thumbnail": "asd",
+    "code": "1233",
+    "stock": 12,
+    "id": 2
+  },
+  {
+    "title": "prod1jjj actualizado",
+    "description": "Casa",
+    "price": 22222,
+    "thumbnail": "asd",
+    "code": "1233j4",
+    "stock": 12,
+    "id": 3
+  },
+  {
+    "title": "asdas",
+    "description": "Casa",
+    "price": 22222,
+    "thumbnail": "asd",
+    "code": "12as33",
+    "stock": 12,
+    "id": 4
+  },
+  {
+    "title": "asdsas",
+    "price": 22222,
+    "thumbnail": "asd",
+    "code": "12assss33",
+    "stock": 12,
+    "id": 5
+  }
+ 
+]
