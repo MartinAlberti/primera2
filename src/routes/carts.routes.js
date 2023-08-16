@@ -11,9 +11,17 @@ routerCart.post("/", async (req, res) => {
 });
 
 
-routerCart.get("/carts/:cid", async (req, res) => {
+routerCart.get("/:cid", async (req, res) => {
   const cid = parseInt(req.params.cid);
   const cart = await cartManager.getCartById(cid);
   cart ? res.status(200).send(cart): res.status(400).send("Carrito no existe");
 });
+
+routerCart.post("/:cid/product/:pid", async (req,res)=>{
+  const cid = parseInt(req.params.cid);
+  const pid = parseInt(req.params.pid);
+  const cart = await cartManager.addProductToCart(cid,pid);
+  cart ? res.status(200).send(cart): res.status(400).send("Carrito no existe");
+
+})
 export default routerCart;
