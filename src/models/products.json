@@ -16,5 +16,25 @@
     "code": "1234",
     "stock": 34,
     "id": 2
+  },
+  {
+    "title": "1",
+    "description": "1",
+    "category": "11",
+    "price": "1",
+    "stock": "1",
+    "code": "1",
+    "status": true,
+    "id": 3
+  },
+  {
+    "title": "1123123",
+    "description": "123123",
+    "category": "123123",
+    "price": "123123",
+    "stock": "123123",
+    "code": "123123",
+    "status": true,
+    "id": 4
   }
 ]

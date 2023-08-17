@@ -9,7 +9,10 @@ routerCart.post("/", async (req, res) => {
   if (confirmacion) res.status(200).send("Carrito creado correctamente");
   else res.status(400).send("Carrito ya existente");
 });
-
+routerCart.get("/", async (req, res) => {
+  const carts = await cartManager.getAllCarts();
+  carts ? res.status(200).send(carts): res.status(400).send("Carrito no existe");
+});
 
 routerCart.get("/:cid", async (req, res) => {
   const cid = parseInt(req.params.cid);
