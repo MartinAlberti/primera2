@@ -33,9 +33,7 @@ io.on("connection", (socket) => {
     productManager.addProduct(prod);
     socket.emit("mensajeProductoCreado", "El producto se creo correctamente");
   });
-  socket.emit("products", products)
-    
- 
+  socket.emit("products", products);
   
 });
 
@@ -50,8 +48,8 @@ app.get("/static", async (req, res) => {
   });
 });
 app.get("/static/home", async (req, res) => {
-  
   res.render("home", {
+    rutaCSS: "home",
     products,
   });
 });
