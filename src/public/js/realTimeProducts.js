@@ -2,6 +2,7 @@ const socket = io();
 
 const form = document.getElementById("formProduct");
 const table = document.getElementById("table");
+socket.emit("load");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -14,68 +15,23 @@ form.addEventListener("submit", (e) => {
   e.target.reset();
 });
 
+const productsDiv = document.getElementById("productsDiv");
 
-  socket.on("products", (products) => {
+socket.on("products", (products) => {
+  productsDiv.innerHTML = "";
+  products.forEach((prod) => {
+    productsDiv.innerHTML += `
+        <div class="product-container">
+          <p>Id: ${prod.id}</p>
+          <p>Title: ${prod.title}</p>
+          <p>Description: ${prod.description}</p>
+          <p>Price: ${prod.price}</p>
+          <p>Status: ${prod.status}</p>
+          <p>Code: ${prod.code}</p>
+          <p>Stock: ${prod.stock}</p>
     
-    // const tableBody = document.querySelector("#productTable tbody");
-  
-    // for (let i = 0; i < products.length; i++) {
-    //   const product = products[i];
-    //   const row = tableBody.insertRow();
-  
-    //   // Insert cell values
-    //   const idCell = row.insertCell(0);
-    //   idCell.innerHTML = product.title;
-  
-    //   const nameCell = row.insertCell(1);
-    //   nameCell.innerHTML = product.description;
-  
-    //   const priceCell = row.insertCell(2);
-    //   priceCell.innerHTML = product.category;
-  
-    //   const categoryCell = row.insertCell(3);
-    //   categoryCell.innerHTML = `$${product.price}`;
-  
-    //   const stockCell = row.insertCell(4);
-    //   stockCell.innerHTML = product.stock;
-  
-    //   const codeCell = row.insertCell(5);
-    //   codeCell.innerHTML = product.code;
-    // }
-    const productsDiv = document.getElementById("productsDiv");
-  
-    products.forEach((product) => {
-      const card = document.createElement("div");
-      card.classList.add("card");
-      card.classList.add("m-4");
-  
-      const cardBody = document.createElement("div");
-      cardBody.classList.add("card-body");
-      cardBody.classList.add("p-4");
-      cardBody.classList.add("shadow");
-  
-      const cardTitle = document.createElement("h5");
-      cardTitle.textContent = product.title;
-  
-      const cardDescription = document.createElement("h6");
-      cardDescription.textContent = product.description;
-  
-      const cardPrice = document.createElement("h6");
-      cardPrice.textContent = `$ ${product.price}`;
-  
-      const cardStock = document.createElement("h6");
-      cardStock.textContent = `stock: ${product.stock}`;
-      cardBody.appendChild(cardTitle);
-  
-      cardBody.appendChild(cardDescription);
-      cardBody.appendChild(cardPrice);
-      cardBody.appendChild(cardStock);
-  
-      card.appendChild(cardBody);
-  
-      productsDiv.appendChild(card);
-    });
+        </div>
+      
+        `;
   });
-
-
-
+});

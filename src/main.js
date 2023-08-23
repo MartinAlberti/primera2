@@ -28,12 +28,17 @@ app.set("views", path.resolve(__dirname, "./views"));
 //Coneccion de Socket.io
 io.on("connection", (socket) => {
   console.log(`Conexion con Socket.io`);
+  socket.on('load', async () => {
+		const products = await productManager.getProducts();
+		socket.emit('products', products);
+	});
   //Add Product
-  socket.on("nuevoProducto", (prod) => {
+  socket.on("nuevoProducto", async (prod) => {
     productManager.addProduct(prod);
-    socket.emit("mensajeProductoCreado", "El producto se creo correctamente");
+    const products = await productManager.getProducts();
+    socket.emit("products", products);
   });
-  socket.emit("products", products);
+  
   
 });
 
