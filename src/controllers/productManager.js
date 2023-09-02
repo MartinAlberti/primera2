@@ -34,8 +34,7 @@ export class ProductManager {
     }
   }
   async getProducts() {
-    let products = JSON.parse(await fs.readFile(this.path, "utf-8"));
-    // console.log(products);
+    const products = JSON.parse(await fs.readFile(this.path, "utf-8"));
     return products;
   }
 
