@@ -1,10 +1,8 @@
 import { Router } from "express";
-import { CartManager } from "../controllers/cartManager.js";
 import cartModel from "../models/carts.model.js";
 import productModel from "../models/products.model.js";
 
 const routerCart = Router();
-const cartManager = new CartManager("./src/models/carts.json");
 
 routerCart.post("/", async (req, res) => {
   try {
@@ -13,9 +11,7 @@ routerCart.post("/", async (req, res) => {
   } catch (error) {
     res.status(400).send({ error: `Error al crear producto: ${error}` });
   }
-  // const confirmacion = await cartManager.createCart(req.body);
-  // if (confirmacion) res.status(200).send("Carrito creado correctamente");
-  // else res.status(400).send("Carrito ya existente");
+ 
 });
 routerCart.get("/", async (req, res) => {
   try {
@@ -55,22 +51,7 @@ routerCart.post("/:cid/product/:pid", async (req, res) => {
     res.status(400).send({ error: `Error al agregar producto: ${error}` });
   }
 });
-// routerCart.delete("/:cid/product/:pid", async (req, res) => {
-//   try {
-//     const cid = req.params.cid;
-//     const pid = req.params.pid;
-//     const cart = await cartModel.findOne({ _id: cid });
-//     // console.log(cart)
-//     const toDelete = await  cartModel.findOne({ id_prod : pid})
-//     console.log(toDelete)
-//     if (!cart) return res.status(404).send("Cart not found");
-//     if (!toDelete) return res.status(404).send("Product not found");
-//     await cart.save();
-//     res.status(200).send({ resultado: 'OK', message: `Producto con id ${pid} eliminado.` })
-//   } catch (error) {
-//     res.status(400).send({ error: `Error al eliminar el producto: ${error}` });
-//   }
-// });
+
 
 routerCart.delete("/:cid/products/:pid", async (req, res) => {
   const { cid, pid } = req.params;

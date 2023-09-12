@@ -18,8 +18,10 @@ Swal.fire({
 });
 
 buttonChat.addEventListener("click", () => {
+  let date = new Date().toLocaleString()
+
   if (valInput.value.trim().length > 0) {
-    socket.emit("mensaje", { user: email, mensaje: valInput.value });
+    socket.emit("mensaje", { date: date, user: email, mensaje: valInput.value });
     valInput.value = "";
   }
 });
@@ -27,6 +29,6 @@ buttonChat.addEventListener("click", () => {
 socket.on("mensajes", arrayMensajes => {
     parrafosMensajes.innerHTML = ""
     arrayMensajes.forEach(mensaje =>{
-        parrafosMensajes.innerHTML += `<p>${mensaje.user} escribio ${mensaje.mensaje}</p>`
+        parrafosMensajes.innerHTML += `<p> ${mensaje.date} <strong>${mensaje.user}</strong>: <i>${mensaje.mensaje}</i></p>`
     })
 })
