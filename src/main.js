@@ -35,12 +35,22 @@ app.use(cookieParser(process.env.SIGNED_COOKIE))
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
+  saveUninitialized: true
 
 }))
+
+
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", path.resolve(__dirname, "./views"));
+function auth (req ,res, next){
+  console.log(req.session.email)
+  if(req.session.email === "admin@admin.com" && req.session.password === "1234"){
+    return next()
 
+  }
+  return res.send("No tienes acceso")
+}
 //Coneccion de Socket.io
 io.on("connection", (socket) => {
   console.log(`Conexion con Socket.io`);
@@ -86,13 +96,17 @@ app.get("/session", (req,res)=>{
 })
 app.get("/login", (req,res)=>{
   const {email, password} = req.body
-  if(email === "admin@admin.com" && password === "1234"){
+  if(email && password ){
     req.session.email = email
     req.session.password = password
 
     return res.send("Usuario logueado")
   }
   return res.send("Login fallido")
+})
+
+app.get("/admin", auth, (req,res)=>{
+  res.send("Sos admin")
 })
 app.get("/logout", (req,res)=>{
   req.session.destroy(()=>{
