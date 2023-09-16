@@ -1,0 +1,31 @@
+body {
+    font-family: "Times New Roman", Times, serif;
+    margin: 0;
+    padding: 20px;
+  }
+  h1{
+      text-align: center;
+  }
+  
+  label, input{
+      display: block;
+      margin-bottom: 10px;
+  }
+  input{
+      width: 30%;
+      padding: 8px;
+      border: 1px solid #ccc
+  }
+  button{
+      background-color: green;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+  }
+  
+  
+  
+  
+  

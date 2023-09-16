@@ -45,7 +45,7 @@ app.use(
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
       mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
-      ttl: 90,
+      ttl: 60,
     }),
     secret: process.env.SESSION_SECRET,
     resave: true,
@@ -104,35 +104,8 @@ app.get("/getCookie", (req, res) => {
   res.send(req.signedCookies); //Solo cookies firmadas
   // res.send(req.cookies)//totas las cookies
 });
-//Session
-app.get("/session", (req, res) => {
-  if (req.session.counter) {
-    req.session.counter++;
-    res.send(`Has entrado ${req.session.counter} de veces a mi pagina`);
-  } else {
-    req.session.counter = 1;
-    res.send("Hola por primera vez");
-  }
-});
-app.get("/login", (req, res) => {
-  const { email, password } = req.body;
-  if (email && password) {
-    req.session.email = email;
-    req.session.password = password;
 
-    return res.send("Usuario logueado");
-  }
-  return res.send("Login fallido");
-});
 
-app.get("/admin", auth, (req, res) => {
-  res.send("Sos admin");
-});
-app.get("/logout", (req, res) => {
-  req.session.destroy(() => {
-    res.send("Salio de la sesion");
-  });
-});
 
 app.use("/static", express.static(path.join(__dirname, "/public"))); //path.join() es una concatenacion de una manera mas optima que con el +
 app.use("/static", routerHandlebars);

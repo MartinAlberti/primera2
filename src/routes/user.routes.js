@@ -22,7 +22,7 @@ userRouter.post("/", async (req, res) => {
         password,
         rol: "admin",
       });
-      res.redirect("/static/login",200, {"info": adminResultado.first_name})
+      res.redirect("/static/login")
 
     } else {
       const resultado = await userModel.create({

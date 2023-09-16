@@ -12,7 +12,7 @@
   </head>
   <body>
     <h1>Welcome {{info}}</h1>
-
+<button id="logoutButton" >Logout</button>
     {{#if products}}
       <div class="table-responsive">
         <table id="table" class="table table-striped">
@@ -29,7 +29,7 @@
               <td>{{this.title}}</td>
               <td>{{this.description}}</td>
               <td>{{this.category}}</td>
-              <td>{{this.price}}</td>
+              <td>$ {{this.price}}</td>
               <td>{{this.stock}}</td>
               <td>{{this.code}}</td>
 
