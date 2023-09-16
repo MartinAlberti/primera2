@@ -2,6 +2,7 @@ import { Router } from "express";
 
 const routerHandlebars = Router()
 import productModel from "../models/products.model.js";
+import { userModel } from "../models/users.model.js";
 
 routerHandlebars.get("/realtimeproducts", async (req, res) => {
     res.render("realTimeProducts", {
@@ -24,5 +25,15 @@ routerHandlebars.get("/realtimeproducts", async (req, res) => {
       rutaJS: "chat",
     });
   });
+
+  routerHandlebars.get("/login", async (req, res) => {
+    res.render("login", {
+    });
+  });
+  routerHandlebars.get("/register", async (req, res) => {
+    res.render("register", {
+    });
+  });
+
   
   export default routerHandlebars

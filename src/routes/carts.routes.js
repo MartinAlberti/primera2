@@ -52,6 +52,30 @@ routerCart.post("/:cid/product/:pid", async (req, res) => {
   }
 });
 
+routerCart.put('/:cid', async (req, res) => {
+	const { cid } = req.params;
+	const putprod  = req.body;
+
+	try {
+		const cart = await cartModel.findById(cid);
+		if (cart) {
+			putprod.forEach(product => {
+				const prod = cart.products.find(cartProd => cartProd.id_prod == product.id_prod);
+				if (prod) {
+					prod.quantity += product.quantity;
+				} else {
+					cart.products.push(product);
+				}
+			});
+			await cart.save();
+			res.status(200).send({ resultado: 'OK', message: cart })
+		} else { 
+		res.status(404).send({ resultado: 'Cart Not Found', message: error });
+		}
+	} catch (error) {
+		res.status(400).send({ error: `Error al agregar productos: ${error}` });
+	}
+});
 
 routerCart.delete("/:cid/products/:pid", async (req, res) => {
   const { cid, pid } = req.params;

@@ -21,7 +21,6 @@ routerProd.get("/", async (req, res) => {
   if (!limit) limit = 10;
   if (!page) page = 1;
 
-  console.log(category);
 
   try {
     if (category) {
