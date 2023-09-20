@@ -16,9 +16,9 @@ routerCart.post("/", async (req, res) => {
 routerCart.get("/", async (req, res) => {
   try {
     const carts = await cartModel.find();
-    res.status(200).send(carts);
+    res.status(200).send({ resultado: "OK", message: carts });
   } catch (error) {
-    res.status(400).send("Carrito no existe");
+    res.status(400).send({ error: `"Carrito no existe": ${error}` });
   }
 });
 
@@ -27,9 +27,9 @@ routerCart.get("/:cid", async (req, res) => {
     const cid = req.params.cid;
 
     const cart = await cartModel.findOne({ _id: cid });
-    res.status(200).send(cart);
+    res.status(200).send({ resultado: "OK", message: cart });
   } catch (error) {
-    res.status(400).send("Carrito no existe");
+    res.status(400).send({ error: `"Carrito no existe": ${error}` });
   }
 });
 
@@ -46,7 +46,7 @@ routerCart.post("/:cid/product/:pid", async (req, res) => {
       ? productExist.quantity++
       : cart.products.push({ id_prod: product.id, quantity: 1 });
     await cart.save();
-    res.status(200).send(cart);
+    res.status(200).send({ resultado: "OK", message: `Producto con id ${pid} agregado al carrito ${cart}`  });
   } catch (error) {
     res.status(400).send({ error: `Error al agregar producto: ${error}` });
   }
@@ -60,7 +60,7 @@ routerCart.put('/:cid', async (req, res) => {
 		const cart = await cartModel.findById(cid);
 		if (cart) {
 			putprod.forEach(product => {
-				const prod = cart.products.find(cartProd => cartProd.id_prod == product.id_prod);
+				const prod = cart.products.find(cartProd => cartProd.id_prod._id == product.id_prod);
 				if (prod) {
 					prod.quantity += product.quantity;
 				} else {
@@ -68,7 +68,7 @@ routerCart.put('/:cid', async (req, res) => {
 				}
 			});
 			await cart.save();
-			res.status(200).send({ resultado: 'OK', message: cart })
+			res.status(200).send({ resultado: 'OK', message: `Carrito actualizado ${cart}` })
 		} else { 
 		res.status(404).send({ resultado: 'Cart Not Found', message: error });
 		}
@@ -83,7 +83,7 @@ routerCart.delete("/:cid/products/:pid", async (req, res) => {
   try {
     const cart = await cartModel.findById(cid);
     if (cart) {
-      const indice = cart.products.findIndex((prod) => prod.id_prod == pid);
+      const indice = cart.products.findIndex((prod) => prod.id_prod._id == pid);
       if (indice != -1) {
         cart.products.splice(indice, 1);
         await cart.save();
@@ -112,7 +112,7 @@ routerCart.delete("/:cid", async (req, res) => {
       await cart.save();
       res.status(200).send({
         respuesta: "OK",
-        mensaje: `Productos fue eliminados correctamente`,
+        mensaje: `Productos fue eliminados correctamente, ${cart}`,
       });
     }
   } catch (error) {

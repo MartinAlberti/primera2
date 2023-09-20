@@ -10,12 +10,12 @@ export class ProductManager {
     const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
     const { title, description, price, code, stock, status } = prod;
 
-		if (!title || !description || !price || !status || !code || !stock) {
-			console.log(
-				'El producto debe incluir los campos title, description, price, status, code y stock'
-			);
-			return;
-		}
+    if (!title || !description || !price || !status || !code || !stock) {
+      console.log(
+        "El producto debe incluir los campos title, description, price, status, code y stock"
+      );
+      return;
+    }
     const maxId = prods.reduce(
       (max, product) => Math.max(max, product.id || 0),
       0
