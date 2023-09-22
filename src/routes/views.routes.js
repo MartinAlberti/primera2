@@ -1,8 +1,8 @@
 import { Router } from "express";
+import productModel from "../models/products.model.js";
+
 
 const routerHandlebars = Router();
-import productModel from "../models/products.model.js";
-import { userModel } from "../models/users.model.js";
 
 routerHandlebars.get("/realtimeproducts", async (req, res) => {
   res.render("realTimeProducts", {
@@ -41,10 +41,6 @@ routerHandlebars.get("/login", async (req, res) => {
   });
 });
 
-routerHandlebars.get("/logout", async (req, res) => {
-  res.render("logout", {
-    rutaJS: "logout",
-  });
-});
+
 
 export default routerHandlebars;
