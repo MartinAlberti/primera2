@@ -16,6 +16,9 @@ import productModel from "./models/products.model.js";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import passport from 'passport'
+import initializePassport from './config/passport.js'
+
 import { userModel } from "./models/users.model.js";
 // import FileStorage from "session-file-store"
 
@@ -52,7 +55,9 @@ app.use(
     saveUninitialized: true,
   })
 );
-
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", path.resolve(__dirname, "./views"));

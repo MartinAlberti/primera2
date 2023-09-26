@@ -1,5 +1,8 @@
 import { Router } from "express";
 import { userModel } from "../models/users.model.js";
+import { createHash } from "../utils/bcrypt.js";
+import passport from "passport";
+
 
 const userRouter = Router();
 
@@ -11,30 +14,15 @@ userRouter.get("/", async (req, res) => {
     res.status(400).send("Error al consultar users");
   }
 });
-userRouter.post("/", async (req, res) => {
+userRouter.post('/', passport.authenticate('register'), async (req, res) => {
   try {
-    const { first_name, last_name, email, password } = req.body;
-    if (email === "adminCoder@coder.com" && password === "dminCod3r123") {
-      const adminResultado = await userModel.create({
-        first_name,
-        last_name,
-        email,
-        password,
-        rol: "admin",
-      });
-      res.redirect("/static/login")
+      if (!req.user) {
+          return res.status(400).send({ mensaje: 'Usuario ya existente' })
+      }
+      return res.redirect("/static/login")
 
-    } else {
-      const resultado = await userModel.create({
-        first_name,
-        last_name,
-        email,
-        password,
-      });
-      res.status(200).send({ mensaje: "Usuario creado", respuesta: resultado });
-    }
   } catch (error) {
-    res.status(400).send({ error: `Error al crear usuario: ${error}` });
+      res.status(500).send({ mensaje: `Error al crear usuario ${error}` })
   }
-});
+})
 export default userRouter;
