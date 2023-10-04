@@ -1,9 +1,10 @@
 import { Router } from "express";
 import productModel from "../models/products.model.js";
-const routerProd = Router();
+import { passportError, authorization } from "../utils/errorMessages.js";
+const productsRouter = Router();
 
 
-routerProd.get("/:id", async (req, res) => {
+productsRouter.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const prod = await productModel.findById(id);
@@ -15,7 +16,7 @@ routerProd.get("/:id", async (req, res) => {
   }
 });
 
-routerProd.get("/", async (req, res) => {
+productsRouter.get("/", async (req, res) => {
   let { limit, page, sort, category } = req.query;
 
   if (!limit) limit = 10;
@@ -41,7 +42,7 @@ routerProd.get("/", async (req, res) => {
   }
 });
 
-routerProd.post("/", async (req, res) => {
+productsRouter.post("/",passportError("jwt"),authorization("Admin"), async (req, res) => {
   try {
     const { title, description, stock, code, price, category } = req.body;
     const respuesta = await productModel.create({
@@ -58,7 +59,7 @@ routerProd.post("/", async (req, res) => {
   }
 });
 
-routerProd.put("/:id", async (req, res) => {
+productsRouter.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { title, description, stock, code, price, category, status } = req.body;
   try {
@@ -79,7 +80,7 @@ routerProd.put("/:id", async (req, res) => {
   }
 });
 
-routerProd.delete("/:id", async (req, res) => {
+productsRouter.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -92,4 +93,4 @@ routerProd.delete("/:id", async (req, res) => {
   }
 });
 
-export default routerProd;
+export default productsRouter;

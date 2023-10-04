@@ -1,14 +1,14 @@
 import { Router } from "express";
 import productModel from "../models/products.model.js";
-const routerHandlebars = Router();
+const viewsRouter = Router();
 
-routerHandlebars.get("/realtimeproducts", async (req, res) => {
+viewsRouter.get("/realtimeproducts", async (req, res) => {
   res.render("realTimeProducts", {
     rutaCSS: "realTimeProducts",
     rutaJS: "realTimeProducts",
   });
 });
-routerHandlebars.get("/home", async (req, res) => {
+viewsRouter.get("/home", async (req, res) => {
   const products = await productModel.find().lean();
   const info = req.query.info;
   res.render("home", {
@@ -18,20 +18,20 @@ routerHandlebars.get("/home", async (req, res) => {
     info,
   });
 });
-routerHandlebars.get("/chat", async (req, res) => {
+viewsRouter.get("/chat", async (req, res) => {
   res.render("chat", {
     rutaJS: "chat",
     rutaCSS:"chat"
   });
 });
-routerHandlebars.get("/register", async (req, res) => {
+viewsRouter.get("/register", async (req, res) => {
   res.render("register",{
     rutaCSS: "register",
   });
 });
-routerHandlebars.get("/login", async (req, res) => {
+viewsRouter.get("/login", async (req, res) => {
   res.render("login",{
     rutaCSS: "login",
   });
 });
-export default routerHandlebars;
+export default viewsRouter;

@@ -1,11 +1,10 @@
 import { Router } from "express";
-import { userModel } from "../models/users.model.js";
-import { validatePassword } from "../utils/bcrypt.js";
 import passport from "passport";
+import { authorization, passportError } from "../utils/errorMessages.js";
 
-const routerSession = Router();
+const sessionRouter = Router();
 
-routerSession.post(
+sessionRouter.post(
   "/login",
   passport.authenticate("login"),
   async (req, res) => {
@@ -27,8 +26,18 @@ routerSession.post(
     }
   }
 );
+sessionRouter.get(
+  "/testJWT",
+  passport.authenticate("jwt", { session: false }),async  (req, res) => {
+    res.status(200).send({mensaje: req.user});
+  })
+;
 
-routerSession.get(
+sessionRouter.get("/current", passportError("jwt"), authorization("user"),(req,res)=>{
+  res.send(req.user)
+})
+
+sessionRouter.get(
   "/github",
   passport.authenticate("github", { scope: ["user:email"] }),
   async (req, res) => {
@@ -36,7 +45,7 @@ routerSession.get(
   }
 );
 
-routerSession.get(
+sessionRouter.get(
   "/githubSession",
   passport.authenticate("github"),
   async (req, res) => {
@@ -45,7 +54,7 @@ routerSession.get(
   }
 );
 
-routerSession.get("/logout", (req, res) => {
+sessionRouter.get("/logout", (req, res) => {
   try {
     if (req.session.login) {
       req.session.destroy();
@@ -58,4 +67,4 @@ routerSession.get("/logout", (req, res) => {
   }
 });
 
-export default routerSession;
+export default sessionRouter;

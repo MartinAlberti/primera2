@@ -2,9 +2,9 @@ import { Router } from "express";
 import cartModel from "../models/carts.model.js";
 import productModel from "../models/products.model.js";
 
-const routerCart = Router();
+const cartRoutes = Router();
 
-routerCart.post("/", async (req, res) => {
+cartRoutes.post("/", async (req, res) => {
   try {
     const respuesta = await cartModel.create(req.body);
     res.status(200).send({ resultado: "OK", message: respuesta });
@@ -13,7 +13,7 @@ routerCart.post("/", async (req, res) => {
   }
  
 });
-routerCart.get("/", async (req, res) => {
+cartRoutes.get("/", async (req, res) => {
   try {
     const carts = await cartModel.find();
     res.status(200).send({ resultado: "OK", message: carts });
@@ -22,7 +22,7 @@ routerCart.get("/", async (req, res) => {
   }
 });
 
-routerCart.get("/:cid", async (req, res) => {
+cartRoutes.get("/:cid", async (req, res) => {
   try {
     const cid = req.params.cid;
 
@@ -33,7 +33,7 @@ routerCart.get("/:cid", async (req, res) => {
   }
 });
 
-routerCart.post("/:cid/product/:pid", async (req, res) => {
+cartRoutes.post("/:cid/product/:pid", async (req, res) => {
   try {
     const cid = req.params.cid;
     const pid = req.params.pid;
@@ -52,7 +52,7 @@ routerCart.post("/:cid/product/:pid", async (req, res) => {
   }
 });
 
-routerCart.put('/:cid', async (req, res) => {
+cartRoutes.put('/:cid', async (req, res) => {
 	const { cid } = req.params;
 	const putprod  = req.body;
 
@@ -77,7 +77,7 @@ routerCart.put('/:cid', async (req, res) => {
 	}
 });
 
-routerCart.delete("/:cid/products/:pid", async (req, res) => {
+cartRoutes.delete("/:cid/products/:pid", async (req, res) => {
   const { cid, pid } = req.params;
 
   try {
@@ -102,7 +102,7 @@ routerCart.delete("/:cid/products/:pid", async (req, res) => {
   }
 });
 
-routerCart.delete("/:cid", async (req, res) => {
+cartRoutes.delete("/:cid", async (req, res) => {
   const { cid } = req.params;
 
   try {
@@ -119,4 +119,4 @@ routerCart.delete("/:cid", async (req, res) => {
     res.status(400).send({ error: `Error al eliminar producto: ${error}` });
   }
 });
-export default routerCart;
+export default cartRoutes;
