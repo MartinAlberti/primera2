@@ -1,6 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { authorization, passportError } from "../utils/errorMessages.js";
+import { generateToken } from "../utils/jwt.js";
 
 const sessionRouter = Router();
 
@@ -19,8 +20,12 @@ sessionRouter.post(
         age: req.user.age,
         email: req.user.email,
       };
-
-      res.redirect(`/static/home?info=${req.session.user.first_name}`);
+      const token = generateToken(req.user);
+      res.cookie("jwtCookie", token, {
+        maxAge: "43200000",
+      });
+      res.status(200).send({ payload: req.user });
+      // res.redirect(`/static/home?info=${req.session.user.first_name}`);
     } catch (error) {
       res.status(500).send({ mensaje: `Error al iniciar sesion ${error}` });
     }
@@ -28,14 +33,20 @@ sessionRouter.post(
 );
 sessionRouter.get(
   "/testJWT",
-  passport.authenticate("jwt", { session: false }),async  (req, res) => {
-    res.status(200).send({mensaje: req.user});
-  })
-;
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    res.status(200).send({ mensaje: req.user });
+  }
+);
 
-sessionRouter.get("/current", passportError("jwt"), authorization("user"),(req,res)=>{
-  res.send(req.user)
-})
+sessionRouter.get(
+  "/current",
+  passportError("jwt"),
+  authorization("user"),
+  (req, res) => {
+    res.send(req.user);
+  }
+);
 
 sessionRouter.get(
   "/github",
@@ -58,10 +69,10 @@ sessionRouter.get("/logout", (req, res) => {
   try {
     if (req.session.login) {
       req.session.destroy();
-      console.log(req.session);
     }
-
-    res.redirect("/static/login");
+    res.clearCookie("jwtCookie");
+    res.status(200).send({ resultado: "Login Terminado" });
+    // res.redirect("/static/login");
   } catch (error) {
     res.status(400).send({ error: `Error al termianr sesion: ${error}` });
   }
