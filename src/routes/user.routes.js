@@ -3,7 +3,6 @@ import { userModel } from "../models/users.model.js";
 import { createHash } from "../utils/bcrypt.js";
 import passport from "passport";
 
-
 const userRouter = Router();
 
 userRouter.get("/", async (req, res) => {
@@ -14,15 +13,14 @@ userRouter.get("/", async (req, res) => {
     res.status(400).send("Error al consultar users");
   }
 });
-userRouter.post('/', passport.authenticate('register'), async (req, res) => {
+userRouter.post("/", passport.authenticate("register"), async (req, res) => {
   try {
-      if (!req.user) {
-          return res.status(400).send({ mensaje: 'Usuario ya existente' })
-      }
-      return res.redirect("/static/login")
-
+    if (!req.user) {
+      return res.status(400).send({ mensaje: "Usuario ya existente" });
+    }
+    return res.redirect("/static/login");
   } catch (error) {
-      res.status(500).send({ mensaje: `Error al crear usuario ${error}` })
+    res.status(500).send({ mensaje: `Error al crear usuario ${error}` });
   }
-})
+});
 export default userRouter;
