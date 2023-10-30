@@ -3,7 +3,7 @@ import passport from "passport"; //Manejador de las estrategias
 import GithubStrategy from "passport-github2";
 import jwt from "passport-jwt";
 import { createHash, validatePassword } from "../utils/bcrypt.js";
-import { userModel } from "../models/users.model.js";
+import  userModel  from "../models/users.model.js";
 
 //Defino la estrategia a utilizar
 const LocalStrategy = local.Strategy;
@@ -12,12 +12,10 @@ const ExtractJWT = jwt.ExtractJwt; //Extractor de los headers de la consulta
 
 const initializePassport = () => {
   const cookieExtractor = (req) => {
-    console.log(req.cookies);
     //{} no hay cookies != no exista mi cookie
     //Si existen cookies, consulta por mi cookie y sino asigno {}
 
     const token = req.cookies ? req.cookies.jwtCookie : {};
-    console.log(token);
     return token;
   };
 
