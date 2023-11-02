@@ -1,7 +1,8 @@
 import cartModel from "../models/carts.model.js";
 import userModel from "../models/users.model.js";
 import productModel from "../models/products.model.js";
-
+import ticketModel from "../models/ticket.model.js";
+import { v4 as uuidv4 } from "uuid";
 
 export const createCart = async (req, res) => {
   try {
@@ -79,6 +80,79 @@ export const updateCart = async (req, res) => {
     res.status(400).send({ error: `Error al agregar productos: ${error}` });
   }
 };
+
+export const putProductToCart = async (req, res) => {
+  // agregar producto al carrito
+  const { cid, pid } = req.params;
+
+  try {
+    const cart = await cartModel.findById(cid);
+    const product = await productModel.findById(pid);
+
+    if (!product) {
+      res
+        .status(404)
+        .send({ resultado: "Product Not Found", message: product });
+      return false;
+    }
+
+    if (product.stock === 0) {
+      console.log(product.stock);
+      res.status(400).send({ error: `No hay stock` });
+    }
+
+    if (cart) {
+      const productExists = cart.products.find((prod) => prod.id_prod == pid);
+
+      if (!productExists) {
+        cart.products.push({ id_prod: product._id, quantity: 1 });
+      } else if (productExists.quantity < product.stock) {
+        productExists.quantity++;
+      } else {
+        return res.status(400).send({ error: `No hay stock suficiente` });
+      }
+
+      await cart.save();
+      return res.status(200).send({ resultado: "OK", message: cart });
+    } else {
+      res.status(404).send({ resultado: "Cart Not Found", message: cart });
+    }
+  } catch (error) {
+    res.status(400).send({ error: `Error al crear producto: ${error}` });
+  }
+};
+
+export const updateQuantity = async (req, res) => {
+  // agregar cantidad de un producto
+  const { cid, pid } = req.params;
+  const { quantity } = req.body;
+  const product = await productModel.findById(pid);
+
+  if (product.stock < productExists.quantity + quantity) {
+    res.status(400).send({ error: `No hay stock suficiente` });
+  }
+
+  try {
+    const cart = await cartModel.findById(cid);
+
+    if (cart) {
+      const productExists = cart.products.find((prod) => prod.id_prod == pid);
+      if (productExists) {
+        productExists.quantity += quantity;
+      } else {
+        res.status(404).send({ resultado: "Product Not Found", message: cart });
+        return;
+      }
+      await cart.save();
+      res.status(200).send({ resultado: "OK", message: cart });
+    } else {
+      res.status(404).send({ resultado: "Cart Not Found", message: cart });
+    }
+  } catch (error) {
+    res.status(400).send({ error: `Error al agregar productos: ${error}` });
+  }
+};
+
 export const deleteProductFromCartById = async (req, res) => {
   const { cid, pid } = req.params;
 
@@ -123,7 +197,9 @@ export const emptyCart = async (req, res) => {
 
 export const purchaseCart = async (req, res) => {
   const { cid } = req.params;
+
   try {
+
     const cart = await cartModel.findById(cid);
     const products = await productModel.find();
 
@@ -142,12 +218,21 @@ export const purchaseCart = async (req, res) => {
           await product.save();
           purchaseItems.push(product.title);
         }
-        //ticket?info=${amount}
       });
       await cartModel.findByIdAndUpdate(cid, { products: [] });
-      res.redirect(
-        `http://localhost:8080/api/tickets/create?amount=${amount}&email=${email}`
-      );
+      const ticket = {
+        code: uuidv4(),
+        amount: amount,
+        purchaser: email,
+      };
+      await ticketModel.create(ticket);
+      const ticketGenerado = await ticketModel.findOne({ code: ticket.code });
+      res
+        .status(201)
+        .send({
+          response: "Ticket generado con éxito",
+          message: ticketGenerado,
+        });
     } else {
       res.status(404).send({ resultado: "Not Found", message: cart });
     }

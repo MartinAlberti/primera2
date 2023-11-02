@@ -1,4 +1,5 @@
 import productModel from "../models/products.model.js";
+import { faker } from "@faker-js/faker";
 
 export const getProducts = async (req, res) => {
   let { limit, page, sort, category } = req.query;
@@ -25,37 +26,37 @@ export const getProducts = async (req, res) => {
   }
 };
 
-export const getProductById = async(req,res)=>{
-    try {
-        const id = req.params.id;
-        const prod = await productModel.findById(id);
-        if (prod) {
-          res.status(200).send({ resultado: "OK", message: prod });
-        } else res.status(404).send({ resultado: "Not Found", message: prod });
-      } catch (error) {
-        res.status(400).send({ error: `Error al consultar producto: ${error}` });
-      }
-}
+export const getProductById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const prod = await productModel.findById(id);
+    if (prod) {
+      res.status(200).send({ resultado: "OK", message: prod });
+    } else res.status(404).send({ resultado: "Not Found", message: prod });
+  } catch (error) {
+    res.status(400).send({ error: `Error al consultar producto: ${error}` });
+  }
+};
 
-export const addProduct = async(req,res)=>{
-    try {
-        const { title, description, stock, code, price, category } = req.body;
-        const respuesta = await productModel.create({
-          title,
-          description,
-          stock,
-          code,
-          price,
-          category,
-        });
-        res.status(200).send({ resultado: "OK", message: respuesta });
-      } catch (error) {
-        res.status(400).send({ error: `Error al crear producto: ${error}` });
-      }
-}
+export const addProduct = async (req, res) => {
+  try {
+    const { title, description, stock, code, price, category } = req.body;
+    const respuesta = await productModel.create({
+      title,
+      description,
+      stock,
+      code,
+      price,
+      category,
+    });
+    res.status(200).send({ resultado: "OK", message: respuesta });
+  } catch (error) {
+    res.status(400).send({ error: `Error al crear producto: ${error}` });
+  }
+};
 
-export const updateProduct = async(req,res)=>{
-    const { id } = req.params;
+export const updateProduct = async (req, res) => {
+  const { id } = req.params;
   const { title, description, stock, code, price, category, status } = req.body;
   try {
     const respuesta = await productModel.findByIdAndUpdate(id, {
@@ -73,10 +74,10 @@ export const updateProduct = async(req,res)=>{
   } catch (error) {
     res.status(400).send({ error: `Error al actualizar producto: ${error}` });
   }
-}
+};
 
-export const deleteProduct = async (req,res)=>{
-    const { id } = req.params;
+export const deleteProduct = async (req, res) => {
+  const { id } = req.params;
 
   try {
     const respuesta = await productModel.findByIdAndDelete(id);
@@ -86,4 +87,32 @@ export const deleteProduct = async (req,res)=>{
   } catch (error) {
     res.status(400).send({ error: `Error al eliminar producto: ${error}` });
   }
-}
+};
+
+export const mockingProducts = async (req, res) => {
+  try {
+    const products = [];
+    const modelProduct = () => {
+      return {
+        _id: faker.database.mongodbObjectId(),
+        title: faker.commerce.productName(),
+        description: faker.commerce.productDescription(),
+        price: faker.commerce.price(),
+        stock: faker.number.int(),
+        status: faker.datatype.boolean(),
+        code: faker.internet.password(),
+      };
+    };
+    const createRandomProduct = (productsQuantity) => {
+      for (let i = 0; i < productsQuantity; i++) {
+        products.push(modelProduct());
+      }
+      return products;
+    };
+    const respuesta = createRandomProduct(100);
+    if (respuesta)
+      res.status(200).send({ resultado: "OK", message: respuesta });
+  } catch (error) {
+    res.status(400).send({ error: `Error al crear productos: ${error}` });
+  }
+};
