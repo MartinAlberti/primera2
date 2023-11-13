@@ -6,8 +6,8 @@ const productsRouter = Router();
 
 productsRouter.get("/", productController.getProducts );
 productsRouter.get("/:id", productController.getProductById);
-productsRouter.post("/",passportError("jwt"),authorization("Admin"), productController.addProduct);
-productsRouter.put("/:id",passportError("jwt"),authorization("Admin"),productController.updateProduct);
-productsRouter.delete("/:id",passportError("jwt"),authorization("Admin"), productController.deleteProduct);
-productsRouter.post("/mockingproducts",passportError("jwt"),authorization("Admin"), productController.mockingProducts)
+productsRouter.post("/",passportError("jwt"),authorization("admin"), productController.addProduct);
+productsRouter.put("/:id",passportError("jwt"),authorization("admin"),productController.updateProduct);
+productsRouter.delete("/:id",passportError("jwt"),authorization("admin"), productController.deleteProduct);
+productsRouter.post("/mockingproducts",passportError("jwt"),authorization("admin"), productController.mockingProducts)
 export default productsRouter;

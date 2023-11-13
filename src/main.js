@@ -13,6 +13,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import passport from 'passport'
 import initializePassport from './config/passport.js'
+import { requestLogger } from "./middlewares/requestLogger.js";
 
 //server
 const PORT = 8080;
@@ -49,9 +50,10 @@ app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", path.resolve(__dirname, "./views"));
 app.use("/static", express.static(path.join(__dirname, "/public"))); //path.join() es una concatenacion de una manera mas optima que con el +
-
+app.use(requestLogger)
 
 //Routes
+
 app.use("/", router)
 
 

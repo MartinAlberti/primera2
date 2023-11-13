@@ -1,5 +1,6 @@
 import "dotenv/config"
 import jwt from "jsonwebtoken";
+import { logger } from "../utils/logger.js";
 
 export const generateToken = (user) => {
   /*
@@ -24,6 +25,8 @@ export const authToken = (req, res, next) => {
 
   jwt.sign(token, process.env.JWT_SECRET, (error, credentials) => {
     if (error) {
+      logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
       res.status(403).send({ error: "Usuario no autorizado" });
     }
     req.user = credentials.user;

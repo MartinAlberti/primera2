@@ -1,7 +1,12 @@
 import productModel from "../models/products.model.js";
 import { faker } from "@faker-js/faker";
+import CustomError from '../services/errors/CustomError.js';
+import EErrors from '../services/errors/enums.js';
+import { generateProductErrorInfo } from '../services/errors/info.js';
+import { logger } from "../utils/logger.js";
 
 export const getProducts = async (req, res) => {
+
   let { limit, page, sort, category } = req.query;
 
   if (!limit) limit = 10;
@@ -39,6 +44,16 @@ export const getProductById = async (req, res) => {
 };
 
 export const addProduct = async (req, res) => {
+  const { title, description, code, price, stock, category } = req.body;
+
+	if ((!title, !description, !code, !price, !stock, !category)) {
+		CustomError.createError({
+			name: 'Error de creación de producto',
+			cause: generateProductErrorInfo({ title, description, code, price, stock, category }),
+			message: 'Error al crear producto',
+			code: EErrors.MISSING_OR_INVALID_PRODUCT_DATA,
+		});
+	}
   try {
     const { title, description, stock, code, price, category } = req.body;
     const respuesta = await productModel.create({
