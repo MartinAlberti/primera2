@@ -37,6 +37,8 @@ userSchema.pre("save", async function (next) {
     const newCart = await cartModel.create({});
     this.cart = newCart._id;
   } catch (error) {
+    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
     next(error);
   }
 });

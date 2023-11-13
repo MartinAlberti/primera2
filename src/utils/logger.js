@@ -10,8 +10,8 @@ const customLevels = {
     debug: 5,
   },
   colors: {
-    fatal: "red",
-    error: "magenta",
+    fatal: "magenta",
+    error: "red",
     waning: "yellow",
     info: "blue",
     http: "green",
@@ -33,11 +33,6 @@ export const logger = winston.createLogger({
     new winston.transports.File({
       filename: "./errors.log",
       level: "error",
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple()
-      ),
-      
     }),
   ],
 });

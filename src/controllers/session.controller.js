@@ -19,6 +19,8 @@ export const login = async (req, res) => {
     // res.status(200).send({ payload: req.user });
     res.redirect(`/static/home?info=${req.session.user.first_name}`);
   } catch (error) {
+    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
     res.status(500).send({ mensaje: `Error al iniciar sesion ${error}` });
   }
 };
@@ -49,6 +51,8 @@ export const logout = async (req, res) => {
     //   res.status(200).send({ resultado: "Login Terminado" });
       res.redirect("/static/login");
     } catch (error) {
+      logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
       res.status(400).send({ error: `Error al termianr sesion: ${error}` });
     }
   }

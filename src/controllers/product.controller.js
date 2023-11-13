@@ -27,6 +27,8 @@ export const getProducts = async (req, res) => {
       res.status(200).send({ resultado: "OK", message: prods });
     }
   } catch (error) {
+    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
     res.status(400).send({ error: `Error al consultar productos: ${error}` });
   }
 };
@@ -39,6 +41,8 @@ export const getProductById = async (req, res) => {
       res.status(200).send({ resultado: "OK", message: prod });
     } else res.status(404).send({ resultado: "Not Found", message: prod });
   } catch (error) {
+    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
     res.status(400).send({ error: `Error al consultar producto: ${error}` });
   }
 };
@@ -66,6 +70,8 @@ export const addProduct = async (req, res) => {
     });
     res.status(200).send({ resultado: "OK", message: respuesta });
   } catch (error) {
+    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
     res.status(400).send({ error: `Error al crear producto: ${error}` });
   }
 };
@@ -87,6 +93,8 @@ export const updateProduct = async (req, res) => {
       res.status(200).send({ resultado: "OK", message: respuesta });
     else res.status(404).send({ resultado: "Not Found", message: respuesta });
   } catch (error) {
+    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
     res.status(400).send({ error: `Error al actualizar producto: ${error}` });
   }
 };
@@ -100,6 +108,8 @@ export const deleteProduct = async (req, res) => {
       res.status(200).send({ resultado: "OK", message: respuesta });
     else res.status(404).send({ resultado: "Not Found", message: respuesta });
   } catch (error) {
+    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
     res.status(400).send({ error: `Error al eliminar producto: ${error}` });
   }
 };
@@ -128,6 +138,8 @@ export const mockingProducts = async (req, res) => {
     if (respuesta)
       res.status(200).send({ resultado: "OK", message: respuesta });
   } catch (error) {
+    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
     res.status(400).send({ error: `Error al crear productos: ${error}` });
   }
 };

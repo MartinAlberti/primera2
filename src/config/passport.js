@@ -30,6 +30,8 @@ const initializePassport = () => {
         try {
           return done(null, jwt_payload); //Retorno el contenido del token
         } catch (error) {
+          logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
           return done(error);
         }
       }
@@ -62,6 +64,8 @@ const initializePassport = () => {
           console.log(userCreated);
           return done(null, userCreated);
         } catch (error) {
+          logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
           return done(error);
         }
       }
@@ -86,6 +90,8 @@ const initializePassport = () => {
 
           return done(null, false); //Contraseña no valida
         } catch (error) {
+          logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
           return done(error);
         }
       }
@@ -119,7 +125,8 @@ const initializePassport = () => {
             done(null, user);
           }
         } catch (error) {
-          console.log("catch " + error.message);
+          logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+
           done(error);
         }
       }

@@ -1,24 +1,10 @@
-{"level":"info","message":"Request POST - /api/users - Date: 13/11/2023, 13:40:53"}
-{"level":"fatal","message":"Request POST - /api/products - Date: 13/11/2023, 13:54:49"}
-{"level":"info","message":"Request POST - /api/products - Date: 13/11/2023, 14:03:25"}
-{"level":"error","message":"error products validation failed: category: Path `category` is required."}
-{"level":"error","message":"Request POST - /api/products - Date: 13/11/2023, 14:21:33"}
-{"level":"error","message":"Error products validation failed: category: Path `category` is required."}
-{"level":"error","message":"[ERROR] - Date: 13/11/2023, 14:35:57 - products validation failed: category: Path `category` is required."}
-{"level":"error","message":"[ERROR] - Date: 13/11/2023, 14:37:04 - products validation failed: category: Path `category` is required."}
-{"level":"error","message":"[ERROR][13/11/2023 - 17:22:38] Ha ocurrido un error: Error al crear producto"}
-{"level":"error","message":"[ERROR] - Date: 13/11/2023, 17:24:18 - Error al crear producto"}
-{"level":"error","message":"[ERROR] - Date: 13/11/2023, 17:24:49 - Error al crear producto"}
-[35merror[39m: [ERROR]  - Date: 13/11/2023, 17:33:23 - ERROR
-[31mfatal[39m: [FATAL]  - Date: 13/11/2023, 17:33:23 - FATAL
-[35merror[39m: [ERROR]  - Date: 13/11/2023, 17:34:57 - Error al crear producto
-{"level":"error","message":"[ERROR]  - Date: 13/11/2023, 17:35:41 - ERROR"}
-{"level":"fatal","message":"[FATAL]  - Date: 13/11/2023, 17:35:41 - FATAL"}
-[35merror[39m: [ERROR]  - Date: 13/11/2023, 17:36:40 - ERROR
-[31mfatal[39m: [FATAL]  - Date: 13/11/2023, 17:36:40 - FATAL
-[36merror[39m: [ERROR]  - Date: 13/11/2023, 17:37:54 - ERROR
-[31mfatal[39m: [FATAL]  - Date: 13/11/2023, 17:37:54 - FATAL
-[36merror[39m: [ERROR]  - Date: 13/11/2023, 17:38:10 - ERROR
-[31mfatal[39m: [FATAL]  - Date: 13/11/2023, 17:38:10 - FATAL
-[35merror[39m: [ERROR]  - Date: 13/11/2023, 17:38:28 - ERROR
-[31mfatal[39m: [FATAL]  - Date: 13/11/2023, 17:38:28 - FATAL
+
+{"level":"error","message":"[ERROR]  - Date: 13/11/2023, 19:13:50 - Error al crear producto"}
+{"level":"error","message":"[ERROR] - Date: 13/11/2023, 19:22:46 - carts validation failed: products.0.id_prod: Path `id_prod` is required."}
+{"level":"error","message":"[ERROR] - Date: 13/11/2023, 19:23:45 - carts validation failed: products.0.id_prod: Path `id_prod` is required."}
+{"level":"error","message":"[ERROR]  - Date: 13/11/2023, 19:24:31 - ERROR"}
+{"level":"fatal","message":"[FATAL]  - Date: 13/11/2023, 19:24:31 - FATAL"}
+{"level":"error","message":"[ERROR]  - Date: 13/11/2023, 19:25:08 - ERROR"}
+{"level":"fatal","message":"[FATAL]  - Date: 13/11/2023, 19:25:08 - FATAL"}
+{"level":"error","message":"[ERROR]  - Date: 13/11/2023, 19:31:41 - ERROR"}
+{"level":"fatal","message":"[FATAL]  - Date: 13/11/2023, 19:31:41 - FATAL"}
