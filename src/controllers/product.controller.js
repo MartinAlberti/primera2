@@ -1,12 +1,11 @@
 import productModel from "../models/products.model.js";
 import { faker } from "@faker-js/faker";
-import CustomError from '../services/errors/CustomError.js';
-import EErrors from '../services/errors/enums.js';
-import { generateProductErrorInfo } from '../services/errors/info.js';
+import CustomError from "../services/errors/CustomError.js";
+import EErrors from "../services/errors/enums.js";
+import { generateProductErrorInfo } from "../services/errors/info.js";
 import { logger } from "../utils/logger.js";
 
 export const getProducts = async (req, res) => {
-
   let { limit, page, sort, category } = req.query;
 
   if (!limit) limit = 10;
@@ -27,7 +26,9 @@ export const getProducts = async (req, res) => {
       res.status(200).send({ resultado: "OK", message: prods });
     }
   } catch (error) {
-    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+    logger.error(
+      `[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`
+    );
 
     res.status(400).send({ error: `Error al consultar productos: ${error}` });
   }
@@ -41,7 +42,9 @@ export const getProductById = async (req, res) => {
       res.status(200).send({ resultado: "OK", message: prod });
     } else res.status(404).send({ resultado: "Not Found", message: prod });
   } catch (error) {
-    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+    logger.error(
+      `[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`
+    );
 
     res.status(400).send({ error: `Error al consultar producto: ${error}` });
   }
@@ -50,14 +53,21 @@ export const getProductById = async (req, res) => {
 export const addProduct = async (req, res) => {
   const { title, description, code, price, stock, category } = req.body;
 
-	if ((!title, !description, !code, !price, !stock, !category)) {
-		CustomError.createError({
-			name: 'Error de creación de producto',
-			cause: generateProductErrorInfo({ title, description, code, price, stock, category }),
-			message: 'Error al crear producto',
-			code: EErrors.MISSING_OR_INVALID_PRODUCT_DATA,
-		});
-	}
+  if ((!title, !description, !code, !price, !stock, !category)) {
+    CustomError.createError({
+      name: "Error de creación de producto",
+      cause: generateProductErrorInfo({
+        title,
+        description,
+        code,
+        price,
+        stock,
+        category,
+      }),
+      message: "Error al crear producto",
+      code: EErrors.MISSING_OR_INVALID_PRODUCT_DATA,
+    });
+  }
   try {
     const { title, description, stock, code, price, category } = req.body;
     const respuesta = await productModel.create({
@@ -70,7 +80,9 @@ export const addProduct = async (req, res) => {
     });
     res.status(200).send({ resultado: "OK", message: respuesta });
   } catch (error) {
-    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+    logger.error(
+      `[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`
+    );
 
     res.status(400).send({ error: `Error al crear producto: ${error}` });
   }
@@ -93,7 +105,7 @@ export const updateProduct = async (req, res) => {
       res.status(200).send({ resultado: "OK", message: respuesta });
     else res.status(404).send({ resultado: "Not Found", message: respuesta });
   } catch (error) {
-    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`);
 
     res.status(400).send({ error: `Error al actualizar producto: ${error}` });
   }
@@ -108,7 +120,9 @@ export const deleteProduct = async (req, res) => {
       res.status(200).send({ resultado: "OK", message: respuesta });
     else res.status(404).send({ resultado: "Not Found", message: respuesta });
   } catch (error) {
-    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+    logger.error(
+      `[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`
+    );
 
     res.status(400).send({ error: `Error al eliminar producto: ${error}` });
   }
@@ -138,7 +152,9 @@ export const mockingProducts = async (req, res) => {
     if (respuesta)
       res.status(200).send({ resultado: "OK", message: respuesta });
   } catch (error) {
-    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
+    logger.error(
+      `[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`
+    );
 
     res.status(400).send({ error: `Error al crear productos: ${error}` });
   }

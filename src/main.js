@@ -14,6 +14,8 @@ import session from "express-session";
 import passport from 'passport'
 import initializePassport from './config/passport.js'
 import { requestLogger } from "./middlewares/requestLogger.js";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUiExpress from "swagger-ui-express"
 
 //server
 const PORT = 8080;
@@ -27,7 +29,26 @@ const io = new Server(server);
 //Mongo DB
 mongoConnection();
 
+const swaggerOptions = {
+  definition: {
+      openapi: '3.1.0',
+      info: {
+          title: 'Documentacion del curso de Backend',
+          decription: 'API Coderhouse Backend'
+      }
+  },
+  apis: [`${__dirname}/docs/**/*.yaml`]
+}
+console.log(__dirname)
+
+//** cualquier subcarpeta 
+//* cualquier nombre de archivo
+
+
 //Middlewares
+
+const specs = swaggerJSDoc(swaggerOptions)
+app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.JWT_SECRET));
@@ -55,6 +76,7 @@ app.use(requestLogger)
 //Routes
 
 app.use("/", router)
+
 
 
 //Coneccion de Socket.io
