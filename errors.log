@@ -8,3 +8,5 @@
 {"level":"fatal","message":"[FATAL]  - Date: 13/11/2023, 19:25:08 - FATAL"}
 {"level":"error","message":"[ERROR]  - Date: 13/11/2023, 19:31:41 - ERROR"}
 {"level":"fatal","message":"[FATAL]  - Date: 13/11/2023, 19:31:41 - FATAL"}
+{"level":"error","message":"[ERROR] - Date: 6/12/2023, 18:27:34 - E11000 duplicate key error collection: ecommerce.products index: code_1 dup key: { code: \"aaa5544\" }"}
+{"level":"error","message":"[ERROR] - Date: 6/12/2023, 18:27:51 - E11000 duplicate key error collection: ecommerce.products index: code_1 dup key: { code: \"aaa5544\" }"}
