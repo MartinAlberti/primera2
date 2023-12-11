@@ -1,5 +1,5 @@
 import "dotenv/config";
-import userModel from "../src/models/users.model";
+import userModel from "../src/models/users.model.js";
 import mongoose from "mongoose";
 import Assert from "assert";
 
