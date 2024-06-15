@@ -22,6 +22,9 @@ input{
     padding: 8px;
     border: 1px solid #ccc
 }
+.button-container {
+    text-align: right;
+}
 button{
     background-color: green;
     color: #fff;

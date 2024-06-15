@@ -246,12 +246,8 @@ export const purchaseCart = async (req, res) => {
       };
       await ticketModel.create(ticket);
       const ticketGenerado = await ticketModel.findOne({ code: ticket.code });
-      res
-        .status(201)
-        .send({
-          response: "Ticket generado con éxito",
-          message: ticketGenerado,
-        });
+      res.status(201).send({ message: ticketGenerado });
+
     } else {
       res.status(404).send({ resultado: "Not Found", message: cart });
     }

@@ -11,13 +11,13 @@ export const login = async (req, res) => {
       last_name: req.user.last_name,
       age: req.user.age,
       email: req.user.email,
+      cart: req.user.cart
     };
     const token = generateToken(req.user);
     res.cookie("jwtCookie", token, {
       maxAge: "43200000",
     });
-    // res.status(200).send({ payload: req.user });
-    res.redirect(`/static/home?info=${req.session.user.first_name}`);
+    res.redirect(`/static/home`);
   } catch (error) {
     logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
 
