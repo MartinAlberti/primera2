@@ -22,6 +22,17 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
+  thumbnail: {
+    type: String,
+    required: true,
+  },
+  thumbnail2: {
+    type: String,
+  },
+  thumbnail3: {
+    type: String,
+
+  },
   status: {
     type: Boolean,
     default: true,

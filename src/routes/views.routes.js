@@ -6,6 +6,7 @@ const viewsRouter = Router();
 
 viewsRouter.get("/realtimeproducts",passportError("jwt"),authorization("admin"), viewsController.realtimeproductsView);
 viewsRouter.get("/home", viewsController.homeView);
+viewsRouter.get("/product/:id", viewsController.productView);
 viewsRouter.get("/chat", viewsController.chatView);
 viewsRouter.get("/register", viewsController.registerView);
 viewsRouter.get("/login", viewsController.loginView);

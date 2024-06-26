@@ -51,9 +51,9 @@ export const getProductById = async (req, res) => {
 };
 
 export const addProduct = async (req, res) => {
-  const { title, description, code, price, stock, category } = req.body;
+  const { title, description, code, price, stock, category, thumbnail } = req.body;
 
-  if ((!title, !description, !code, !price, !stock, !category)) {
+  if ((!title, !description, !code, !price, !stock, !category, !thumbnail)) {
     CustomError.createError({
       name: "Error de creación de producto",
       cause: generateProductErrorInfo({
@@ -63,13 +63,14 @@ export const addProduct = async (req, res) => {
         price,
         stock,
         category,
+        thumbnail
       }),
       message: "Error al crear producto",
       code: EErrors.MISSING_OR_INVALID_PRODUCT_DATA,
     });
   }
   try {
-    const { title, description, stock, code, price, category } = req.body;
+    const { title, description, stock, code, price, category,thumbnail,thumbnail2,thumbnail3 } = req.body;
     const respuesta = await productModel.create({
       title,
       description,
@@ -77,6 +78,9 @@ export const addProduct = async (req, res) => {
       code,
       price,
       category,
+      thumbnail,
+      thumbnail2,
+      thumbnail3
     });
     res.status(200).send({ resultado: "OK", message: respuesta });
   } catch (error) {

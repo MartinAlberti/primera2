@@ -1,13 +1,29 @@
-const logoutButton = document.getElementById("logoutButton");
 
-logoutButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  window.location.href = "/api/sessions/logout";
+
+document.addEventListener('DOMContentLoaded', (event) => {  
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', (event) => {
+      if (!event.target.classList.contains('addToCartBtn')) {
+        const productId = card.getAttribute('data-product-id');
+        window.location.href = `http://localhost:8080/static/product/${productId}`;
+      }
+    });
+  });
+
+  document.querySelectorAll('.addToCartBtn').forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.stopPropagation(); // Prevent the click event from bubbling up to the card
+      const productId = button.getAttribute('data-product-id');
+      addToCart(productId);
+    });
+  });
 });
+
 async function addToCart(productId) {
   const cartIdElement = document.getElementById('cart-ID');
   const cartId = cartIdElement.textContent.replace('CartId: ', '').trim();
   try {
+
     const response = await fetch(`http://localhost:8080/api/carts/${cartId}/product/${productId}`, {
       method: 'POST',
       headers: {
@@ -21,16 +37,9 @@ async function addToCart(productId) {
       alert(`Error: ${result.error}`);
     }
   } catch (error) {
-    console.error('Error al agregar el producto:', error);
-    alert('Error al agregar el producto. Consulte la consola para más detalles.');
+    // console.error('Error al agregar el producto:', error);
+    // alert('Error al agregar el producto. Consulte la consola para más detalles.');
+    window.location.href = `http://localhost:8080/static/login`;
+
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('#addToCartBtn').forEach(button => {
-    button.addEventListener('click', event => {
-      const productId = event.target.getAttribute('data-product-id');
-      addToCart(productId);
-    });
-  });
-});

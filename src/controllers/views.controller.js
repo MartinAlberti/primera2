@@ -17,6 +17,25 @@ export const homeView = async (req, res) => {
     user,
   });
 };
+export const productView = async (req, res) => {
+  
+    const productId = req.params.id; // Get product ID from URL params
+    const product = await productModel.findById(productId); // Fetch product from database
+    const user = req.session.user;
+
+    if (!product) {
+      return res.status(404).send('Product not found');
+    }
+
+    res.render("product", {
+      rutaJS: "product",
+      rutaCSS: "product",
+      product,
+      user,
+    });
+
+};
+
 export const chatView = async (req, res) => {
   res.render("chat", {
     rutaJS: "chat",

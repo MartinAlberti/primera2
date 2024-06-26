@@ -76,7 +76,7 @@ app.engine('handlebars', engine({
 }));
 app.set('view engine', 'handlebars');
 app.set("views", path.resolve(__dirname, "./views"));
-app.use("/static", express.static(path.join(__dirname, "/public"))); //path.join() es una concatenacion de una manera mas optima que con el +
+app.use("/static", express.static(path.join(__dirname, "/public"))); 
 app.use(requestLogger)
 
 //Routes

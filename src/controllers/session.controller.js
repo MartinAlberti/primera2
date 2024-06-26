@@ -43,16 +43,14 @@ export const githubSession = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-    try {
-      if (req.session.login) {
-        req.session.destroy();
-      }
-      res.clearCookie("jwtCookie");
-    //   res.status(200).send({ resultado: "Login Terminado" });
-      res.redirect("/static/login");
-    } catch (error) {
-      logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`)
-
-      res.status(400).send({ error: `Error al termianr sesion: ${error}` });
+  try {
+    if (req.session) {
+      req.session.destroy();
     }
+    res.clearCookie("jwtCookie");
+    res.redirect("/static/login");
+  } catch (error) {
+    logger.error(`[ERROR] - Date: ${new Date().toLocaleString()} - ${error.message}`);
+    res.status(400).send({ error: `Error al terminar sesión: ${error}` });
   }
+};
