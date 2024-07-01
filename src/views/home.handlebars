@@ -2,42 +2,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-      crossorigin="anonymous"
-    />
+      {{!-- <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+        crossorigin="anonymous"
+      /> --}}
     <title>Document</title>
   </head>
   <body>
 <body>
     <p id="cart-ID">CartId: {{user.cart}}</p>
 
-    <div class="container">
-      {{#if products}}
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-          {{#each products}}
-            <div class="col">
-              <div class="card h-100" data-product-id="{{this._id}}">
-                <div class="card-body">
-                  <img class="card-img" src="{{this.thumbnail}}" alt="">
-                  <h5 class="card-title">{{this.title}}</h5>
-                  <p class="card-text">{{this.description}}</p>
-                  <p class="card-text"><strong>Price:</strong> $ {{this.price}}</p>
-                  <p class="card-text"><strong>Stock:</strong> {{this.stock}}</p>
-                  <div>
-                    <button class="addToCartBtn btn btn-primary" data-product-id="{{this._id}}">Add to Cart</button>
+       <div class="container-fluid">
+    <div class="row">
+      <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="position-sticky pt-3">
+          <h5>Filters</h5>
+          <form id="filterForm">
+            <div class="mb-3">
+              <label for="category" class="form-label">Category</label>
+              <select id="category" class="form-select">
+                <option value="" {{#unless category}}selected{{/unless}}>All</option>
+                <option value="guitars" {{#if (eq category 'guitars')}}selected{{/if}}>Guitars</option>
+                <option value="accessories" {{#if (eq category 'accessories')}}selected{{/if}}>Accessories</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="sort" class="form-label">Sort by Price</label>
+              <select id="sort" class="form-select">
+                <option value="asc" {{#if (eq sort 'asc')}}selected{{/if}}>Low to High</option>
+                <option value="desc" {{#if (eq sort 'desc')}}selected{{/if}}>High to Low</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Apply</button>
+          </form>
+        </div>
+      </nav>
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <p id="cart-ID">CartId: {{user.cart}}</p>
+        <div class="container">
+          {{#if products}}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+              {{#each products}}
+                <div class="col">
+                  <div class="card h-100 shadow" data-product-id="{{this._id}}">
+                    <div class="card-body">
+                      <img class="card-img" src="{{this.thumbnail}}" alt="">
+                      <h5 class="card-title">{{this.title}}</h5>
+                      <p class="card-text">{{this.description}}</p>
+                      <p class="card-text"><strong>Price:</strong> $ {{this.price}}</p>
+                      <div>
+                        <button class="addToCartBtn btn btn-primary" data-product-id="{{this._id}}">Add to Cart</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              {{/each}}
             </div>
-          {{/each}}
+          {{else}}
+            <span>No hay productos</span>
+          {{/if}}
         </div>
-      {{else}}
-        <span>No hay productos</span>
-      {{/if}}
+      </main>
     </div>
+  </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"

@@ -8,13 +8,28 @@ export const realtimeproductsView = async (req, res) => {
   });
 };
 export const homeView = async (req, res) => {
-  const products = await productModel.find().lean();
+  let { category, sort } = req.query;
+  let filter = {};
+  let sortOption = {};
+
+  if (category) {
+    filter.category = category;
+  }
+
+  if (sort) {
+    sortOption.price = sort === 'asc' ? 1 : -1;
+  }
+
+  const products = await productModel.find(filter).sort(sortOption).lean();
   const user = req.session.user;
+
   res.render("home", {
     rutaCSS: "home",
     rutaJS: "home",
     products,
     user,
+    category,
+    sort
   });
 };
 export const productView = async (req, res) => {
