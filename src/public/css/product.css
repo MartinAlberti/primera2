@@ -3,70 +3,50 @@ body {
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
-  }
-  #cart-id{
-    display:none
-  }
-  .col-lg-7 {
-    height: 100%;
-  }
-  .mt-auto {
-    margin-top: auto;
-  }
-  .container {
-    width: 80%;
-    margin: 20px auto;
+}
+
+#cart-id {
+    display: none;
+}
+
+.container {
+    background-color: #fff;
     padding: 20px;
-    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .text-center {
+    max-width: 1200px; /* Max width for large screens */
+    margin: 20px auto; /* Center the container */
+}
+
+.title {
+    font-size: 2rem;
+    color: #333;
     text-align: center;
-  }
-  .title{
-    padding-bottom: 20px;
-  }
-  
-  .product-details {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .product-details p {
-    margin-bottom: 8px; /* Adjust as needed */
-  }
-  
-  .product-image {
-    flex: 1 1 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .product-image img {
-    max-width: 100%;
-    height: auto;
+    margin: 0 auto 20px auto; /* Center the title and add margin at the bottom */
+    max-width: 100%; /* Ensure the title does not overflow */
+}
+
+.carousel-inner img {
     border-radius: 8px;
-  }
   
-  .product-text {
-    flex: 2 1 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .product-text p {
+}
+.carousel-inner img:hover{
+  cursor: zoom-in;
+}
+
+.product-details p {
     margin: 10px 0;
     font-size: 16px;
-    color: #333;
-  }
-  
-  .addToCartBtn {
-    margin-top: 20px;
+    color: #555;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.addToCartBtn {
     padding: 10px 20px;
     background-color: #007bff;
     border: none;
@@ -75,19 +55,61 @@ body {
     font-size: 16px;
     border-radius: 5px;
     transition: background-color 0.3s;
-  }
-  
-  .addToCartBtn:hover {
+}
+
+.addToCartBtn:hover {
     background-color: #0056b3;
-  }
-  
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    background-color: #010911; /* Change to your desired color */
-  }
-  
-  /* Change color of carousel control arrows */
-  .carousel-control-prev,
-  .carousel-control-next {
-    color: #007bff; /* Change to your desired color */
-  }
+}
+
+.thumbnail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: sticky;
+    top: 0;
+}
+
+.thumbnail-container img {
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    width: 50px;
+}
+
+.thumbnail-container img.active {
+    border-color: #007bff;
+}
+/* Make modal fullscreen with margin */
+.modal-fullscreen {
+  width: 90vw; /* Add margin by reducing width */
+  height: 90vh; /* Add margin by reducing height */
+  margin: 0 auto;
+  padding: 0;
+}
+
+.modal-content {
+  height: 100%;
+  border: none;
+  border-radius: 8px; /* Rounded corners for a modern look */
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 50px); /* Adjust to fit close button */
+  padding: 0;
+}
+
+.modal-body img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.btn-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1050; /* Ensure it appears on top of other content */
+}

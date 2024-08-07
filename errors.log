@@ -16,3 +16,18 @@
 {"level":"error","message":"[ERROR] - Date: 25/6/2024, 01:09:22 - Cast to ObjectId failed for value \"CartId: 667ad879a1d457aabe9b6cbc\" (type string) at path \"_id\" for model \"carts\""}
 {"level":"error","message":"[ERROR] - Date: 25/6/2024, 01:11:03 - Cast to ObjectId failed for value \"CartId: 667ad879a1d457aabe9b6cbc\" (type string) at path \"_id\" for model \"carts\""}
 {"level":"error","message":"[ERROR] - Date: 25/6/2024, 01:12:36 - Cast to ObjectId failed for value \"CartId: 667ad879a1d457aabe9b6cbc\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:16:53 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:17:41 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:20:26 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:20:30 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:21:25 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:21:38 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:23:04 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:26:16 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:29:10 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:29:13 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:29:16 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:29:19 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:29:33 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:31:00 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}
+{"level":"error","message":"[ERROR] - Date: 7/8/2024, 01:32:17 - Cast to ObjectId failed for value \"quantity\" (type string) at path \"_id\" for model \"carts\""}

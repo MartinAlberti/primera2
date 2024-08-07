@@ -1,24 +1,47 @@
-* {
-  margin: 0;
-  padding: 0;
-}
+/* Navbar container and styling */
 .navbar {
-    background-color: #333;
-    color: #fff;
-   
+  background-color: #f8f9fa; /* Light background color */
+  border-bottom: 1px solid #e1e5e8; /* Subtle border for separation */
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #343a40; /* Darker text color */
+}
+
+.navbar-toggler {
+  border-color: #343a40; /* Darker border for the toggler button */
+}
+
+.navbar-toggler-icon {
+  background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16"><path d="M2 3.5A.5.5 0 0 1 2.5 3h11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-1zM2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-1zM2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-1z"/></svg>');
+}
+
+.navbar-nav .nav-link {
+  color: #343a40; /* Darker text color */
+  transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff; /* Highlight color on hover */
+}
+
+.navbar-nav .nav-item {
+  position: relative; /* Ensure relative positioning for badge */
+}
+
+.navbar-nav .nav-item .badge {
+  position: absolute; /* Position badge absolutely */
+  top: 50%; /* Center vertically */
+  right: -10px; /* Adjust position from the right edge */
+  transform: translateY(-50%); /* Center vertically */
+  font-size: 0.29rem; /* Slightly smaller font size for badge */
+  padding: 0.25em 0.4em; /* Adjust padding for badge */
+}
+
+/* Adjustments for responsive design */
+@media (max-width: 992px) {
+  .navbar-collapse {
+    background-color: #f8f9fa;
   }
-  
-  .nav-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .nav-item {
-    display: inline;
-    margin-right: 20px;
-  }
-  
-  .nav-item a {
-    text-decoration: none;
-    color: #fff;
-  }
+}

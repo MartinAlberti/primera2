@@ -257,3 +257,14 @@ export const purchaseCart = async (req, res) => {
     res.status(400).send({ error: `Error al consultar carrito: ${error}` });
   }
 };
+export const getCartQuantity = async (req, res) => {
+  const cid = req.params.cid;
+  try {
+    const cart = await cartModel.findById(cid);
+    const quantity = cart.products.reduce((total, item) => total + item.quantity, 0);
+    console.log(quantity)
+    res.json({ quantity });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch cart quantity' });
+  }
+};

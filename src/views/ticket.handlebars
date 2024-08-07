@@ -5,12 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ticket</title>
 </head>
-<body>
-  <h1>Purchase Ticket</h1>
-  <div>
-    <p>Code: {{info.code}}</p>
-    <p>Amount: ${{info.amount}}</p>
-    <p>Purchaser: {{info.purchaser}}</p>
+<body >
+ <div class="ticket-container">
+    <div class="ticket-header text-center">
+      <h1>Purchase Ticket</h1>
+      <p class="text-muted">Thank you for your purchase!</p>
+    </div>
+    <div class="ticket-details">
+      <p><strong>Transaction ID:</strong> {{info.code}}</p>
+      <p><strong>Amount:</strong> ${{info.amount}}</p>
+      <p><strong>Purchaser:</strong> {{info.purchaser}}</p>
+      <p><strong>Date:</strong> {{currentDateTime}}</p>
+      <p><strong></strong> {{info.transactionId}}</p>
+    </div>
+    <div class="ticket-footer">
+      <p>If you have any questions, please contact our support team.</p>
+      <p class="text-muted">&copy; 2024 Your Store Name</p>
+    </div>
   </div>
 </body>
 </html>
+ 

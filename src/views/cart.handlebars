@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cart</title>
   </head>
-  <body>
+<body>
     <h1 class="text-center my-4">Cart for {{user.first_name}}</h1>
 
     <div class="container">
@@ -14,25 +14,26 @@
             <div class="col">
               <div class="card h-100">
                 <div class="card-body">
-                  <img src="{{this.thumbnail}}" class="cartImg" alt="">
-                  <h5 class="card-title">{{this.title}}</h5>
-                  <p class="card-text"><strong>Price:</strong>
-                    ${{this.price}}</p>
-                  <p class="card-text"><strong>Quantity:</strong>
-                    {{this.quantity}}</p>
-
+                  <img src="{{this.thumbnail}}" class="cartImg" alt="{{this.title}}">
+                  <div class="card-info">
+                    <h5 class="card-title">{{this.title}}</h5>
+                    <div>
+                      <p class="card-text"><strong>Price:</strong> ${{this.price}}</p>
+                      <p class="card-text"><strong>Quantity:</strong> {{this.quantity}}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           {{/each}}
         </div>
-         <div>
-          <button id="purchaseCart" onclick="purchaseCart('{{user.cart}}')">Purchase Cart</button>
+        <div class="total-amount">
+          Total Amount: ${{totalAmount}}
         </div>
+        <button id="purchaseCart" onclick="purchaseCart('{{user.cart}}')">Purchase Cart</button>
       {{else}}
         <p>{{message}}</p>
       {{/if}}
     </div>
-
   </body>
 </html>
